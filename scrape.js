@@ -16,7 +16,7 @@ module.exports = function scrape(url, options) {
     if (options.userAgent) {
       childArgs.push(options.userAgent);
     }
-    childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
+    childProcess.execFile(binPath, childArgs, {maxBuffer: process.env.MAX_BUFFER || 1024 * 200 }, function(err, stdout, stderr) {
       if (err) {
         return reject(err);
       }
